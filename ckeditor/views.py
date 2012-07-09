@@ -23,6 +23,7 @@ except ImportError:
         return fn
 
 THUMBNAIL_SIZE = (75, 75)
+MAX_IMAGE_SIZE = (800, 600)
 
 
 def get_available_name(name):
@@ -62,6 +63,8 @@ def create_thumbnail(filename):
     # scale and crop to thumbnail
     imagefit = ImageOps.fit(image, THUMBNAIL_SIZE, Image.ANTIALIAS)
     imagefit.save(get_thumb_filename(filename))
+    image.thumbnail(MAX_IMAGE_SIZE, Image.ANTIALIAS)
+    image.save(filename)
 
 
 def get_media_url(path):
